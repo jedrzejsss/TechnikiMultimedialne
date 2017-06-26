@@ -28,14 +28,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.TextArea;
 
+/** główna klasa odpowiedzialna za okienko */
 public class Klawiatura extends Application {
 
     private LettersPane lettersPane;
 
-    private void init(Stage primaryStage) { //ustawienia rozmiaru okna
+    /** ustawienia rozmiaru okna */
+    private void init(Stage primaryStage) { 
         Group root = new Group();
         primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(root, 520, 520));
+        primaryStage.setScene(new Scene(root, 750, 750));
         lettersPane = new LettersPane();
         root.getChildren().add(lettersPane);
     }
@@ -49,7 +51,8 @@ public class Klawiatura extends Application {
         });
     }
 
-    public static class LettersPane extends Region { //klasa odpowiedzialna za dodanie elementów do sceny oraz ustawienie ich elementów 
+    /** klasa odpowiedzialna za dodanie elementów do sceny oraz ustawienie ich elementów */
+    public static class LettersPane extends Region { 
 
         private static final Font FONT_DEFAULT = new Font(Font.getDefault().getFamily(), 200);
         private static final Interpolator INTERPOLATOR = Interpolator.SPLINE(0.295, 0.800, 0.305, 1.000);
@@ -60,9 +63,10 @@ public class Klawiatura extends Application {
         VBox vbox2;
         private PrzechwytywanieKlawiszy przechwytywanieKlawiszy;
 
-        public LettersPane() { //konstruktor klasy letter pane, ustwanienie jej parametrów
+        /** konstruktor klasy letter pane, ustwanienie jej parametrów */
+        public LettersPane() { 
             setId("LettersPane");
-            setPrefSize(480, 480);
+            setPrefSize(700, 700);
             setFocusTraversable(true);
             setOnMousePressed(new EventHandler<MouseEvent>() {
 
@@ -73,12 +77,12 @@ public class Klawiatura extends Application {
                 }
             });
 
-            polecenieText = new Text("Przepisz poniższy tekst:");
+            polecenieText = new Text("Przepisz dowolny tekst albo poniższy:");
             polecenieText.setTextOrigin(VPos.TOP);
             polecenieText.setFont(new Font(Font.getDefault().getFamily(), 32));
             polecenieText.setFill(Color.rgb(80, 80, 80));
 
-            textDoPrzepisania = new Text("Ala ma kota 123, a kot ma kaca.\n Piwo lej barmanie piwo lej\n albowiem ja pragnienie mam");
+            textDoPrzepisania = new Text("Java to obiektowy język programowania \n stworzony przez grupę roboczą pod kierunkiem\nJamesa Goslinga z firmy Sun Microsystems. Java jest językiem\n tworzenia programów źródłowych kompilowanych do kodu bajtowego,\nczyli postaci wykonywanej przez maszynę wirtualną. Język\ncechuje się silnym typowaniem. Jego podstawowe\nkoncepcje zostały przejęte z języka Smalltalk\noraz z języka C++");
             textDoPrzepisania.setTextOrigin(VPos.TOP);
             textDoPrzepisania.setFont(new Font(Font.getDefault().getFamily(), 20));
             textDoPrzepisania.setLayoutY(100);
@@ -87,8 +91,8 @@ public class Klawiatura extends Application {
             przechwytywanieKlawiszy = new PrzechwytywanieKlawiszy();
 
             textArea = new TextArea();
-            textArea.minHeight(20);
-            textArea.minWidth(3000);
+            textArea.minHeight(200);
+            textArea.minWidth(30000);
             textArea.setOnKeyPressed((KeyEvent ke) -> {
                 przechwytywanieKlawiszy.zapiszPressed(ke.getText());
                 ke.consume();
@@ -100,8 +104,8 @@ public class Klawiatura extends Application {
             });
 
             vbox2 = new VBox(textArea);
-            vbox2.setMinHeight(100);
-            vbox2.setMinWidth(300);
+            vbox2.setMinHeight(300);
+            vbox2.setMinWidth(700);
 
             Button przycisk = new Button("wypisz");
             przycisk.setMinWidth(100);

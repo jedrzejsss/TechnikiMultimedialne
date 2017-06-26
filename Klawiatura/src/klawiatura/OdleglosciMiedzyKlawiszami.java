@@ -9,12 +9,15 @@ package klawiatura;
  *
  * @author Jedrzej
  */
+
+/** klasa odpowiedzialna za liczenie odległości między klawiszami*/
 public class OdleglosciMiedzyKlawiszami {
     private Rzad pierwszy;
     private Rzad drugi;
     private Rzad trzeci;
     
-    public OdleglosciMiedzyKlawiszami() { //tworzymy układ klawiatury "qwerty"
+    /** tworzymy układ klawiatury "qwerty" */
+    public OdleglosciMiedzyKlawiszami() { 
         String[] tmpPierwszy = {"q", "w", "e", "r" , "t", "y", "u", "i", "o", "p"};
         pierwszy = new Rzad(tmpPierwszy);
         String[] tmpDrugi = {"a", "s", "d", "f" , "g", "h", "j", "k", "l"};
@@ -22,15 +25,15 @@ public class OdleglosciMiedzyKlawiszami {
         String[] tmpTrzeci = {"z", "x", "c", "v" , "b", "n", "m"};
         trzeci = new Rzad(tmpTrzeci);
     }
-    
-    public int dajRoznice(String a, String b){      //daje różnicę odległości między klawiszami
+    /** daje różnicę odległości między klawiszami */
+    public int dajRoznice(String a, String b){      
         Pozycja pozycjaPierwszego = ustalPozycje(a);
         Pozycja pozycjaDrugiego = ustalPozycje(b);
         return pozycjaPierwszego.dajRoznicePozycji(pozycjaDrugiego);
     }
     
-    
-    private Pozycja ustalPozycje(String znak) { // ustala pozycję znaku na klawiaturze. Rząd i numer
+    /** ustala pozycję znaku na klawiaturze. Rząd i numer */
+    private Pozycja ustalPozycje(String znak) { 
         Pozycja p;
         int tmp = pierwszy.dajPozycję(znak);
         if(tmp != -1) {
@@ -50,14 +53,15 @@ public class OdleglosciMiedzyKlawiszami {
         }
     }
     
-    
+    /** klasa definiująca rzedy klawiszy oraz oblicza różnicę między klawiszami */
     private class Rzad {
         private String[] klawisze;
         public Rzad(String[] s) {
             klawisze = s;
         }
         
-        public int dajPozycję(String k) { //daje pozycję klawisza, gdy klawisza nie ma w tablicy zwraca -1
+        /** daje pozycję klawisza, gdy klawisza nie ma w tablicy zwraca -1 */
+        public int dajPozycję(String k) { 
             for (int i = 0; i < klawisze.length; i++) {
                 if(klawisze[i].equals(k)) {
                     return i;
@@ -66,7 +70,9 @@ public class OdleglosciMiedzyKlawiszami {
             return -1;
         }
     }
-    private class Pozycja { //przechowuje numer rzędu i pozycję klawisza oraz daje różniceę między klawiszami
+    
+    /** przechowuje numer rzędu i pozycję klawisza oraz daje różniceę między klawiszami */
+    private class Pozycja { 
         public int rzad;
         public int numer;
         private Pozycja(int _rzad, int _numer) {
@@ -74,7 +80,8 @@ public class OdleglosciMiedzyKlawiszami {
             numer = _numer;
         }
         
-        public int dajRoznicePozycji(Pozycja p) { //oblicza różnicę pozycji klawiszy
+        /** oblicza różnicę pozycji klawiszy */
+        public int dajRoznicePozycji(Pozycja p) { 
             return Math.abs(this.rzad - p.rzad) + Math.abs(this.numer - p.numer);
         }
 }
