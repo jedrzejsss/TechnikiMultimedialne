@@ -19,30 +19,41 @@ public class PrzechwytywanieKlawiszy {
     private Przejscie przejscie;
     private Timer timer;
     private OdleglosciMiedzyKlawiszami odlegloscMiedzyKlawiszami;
+    private String[] listaDozwolonychZnakow;
     /** tworzy nową ArrayList dla obiektów Pzejście */
     public PrzechwytywanieKlawiszy() {
         przejscia = new ArrayList<Przejscie>(); 
         timer = new Timer();                    
         odlegloscMiedzyKlawiszami = new OdleglosciMiedzyKlawiszami(); 
+        this.listaDozwolonychZnakow = new String[]{"q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"};
         
     }
     /** zapisuje wciśnięty znak i czas w którym został wciśnięty */
     public void zapiszPressed(String znak) {
-        if (przejscie != null) {
-            przejscie.setDrugi(znak);
-            timer.setStop();
-            przejscie.setTime(timer.licz());
-            przejscia.add(przejscie);
+        for (String listaDozwolonychZnakow1 : listaDozwolonychZnakow) {
+            if (listaDozwolonychZnakow1.equals(znak)) {
+                if (przejscie != null) {
+                    przejscie.setDrugi(znak);
+                    timer.setStop();
+                    przejscie.setTime(timer.licz());
+                    przejscia.add(przejscie);
+                }
+            }
         }
     }
     /** zapisuje puszczony klawisz i zapisuje czas, w którym został puszczony */
     public void zapiszRelased(String znak) { 
-        przejscie = new Przejscie(znak);
-        timer.setStart();
+        for (String listaDozwolonychZnakow1 : listaDozwolonychZnakow) {
+            if (listaDozwolonychZnakow1.equals(znak)) {
+                przejscie = new Przejscie(znak);
+                timer.setStart();
+            }
+        }
+        
     }
-    /** rosnąco sortuje przejścia między klawiszami */
-    public void sortuj() { 
-        Sortowanie sort = new Sortowanie();
+    /** segreguje przejścia między klawiszami */
+    public void segreguj() { 
+        Segregator sort = new Segregator();
         przejscia = sort.sortuj(przejscia);
         for (Przejscie p1 : przejscia) {
             p1.addOdleglosc(odlegloscMiedzyKlawiszami.dajRoznice(p1.pierwszy, p1.drugi));
@@ -107,13 +118,13 @@ public class PrzechwytywanieKlawiszy {
 
     }
 
-    /** klasa odpowiedźialna za posortowanie i policzenie średnich czasów przejść */
-    private class Sortowanie {
+    /** klasa odpowiedźialna za segregowanie i policzenie średnich czasów przejść */
+    private class Segregator {
 
         private ArrayList<SredniaPrzejsc> tmp;
         
         /** tworzy nową ArrayList */
-        public Sortowanie() {
+        public Segregator() {
             tmp = new ArrayList<SredniaPrzejsc>();
         }
 

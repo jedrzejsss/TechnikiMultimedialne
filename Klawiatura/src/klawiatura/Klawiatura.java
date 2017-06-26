@@ -111,7 +111,7 @@ public class Klawiatura extends Application {
             przycisk.setMinWidth(100);
 
             przycisk.setOnAction(value -> {
-                przechwytywanieKlawiszy.sortuj();
+                przechwytywanieKlawiszy.segreguj();
             });
 
             vbox = new VBox();
