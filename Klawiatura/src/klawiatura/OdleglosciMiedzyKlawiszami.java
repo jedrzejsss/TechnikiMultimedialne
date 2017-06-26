@@ -16,7 +16,7 @@ public class OdleglosciMiedzyKlawiszami {
     private Rzad drugi;
     private Rzad trzeci;
     
-    /** tworzymy układ klawiatury "qwerty" */
+    /** tworzy układ klawiatury "qwerty" */
     public OdleglosciMiedzyKlawiszami() { 
         String[] tmpPierwszy = {"q", "w", "e", "r" , "t", "y", "u", "i", "o", "p"};
         pierwszy = new Rzad(tmpPierwszy);
