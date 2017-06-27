@@ -56,44 +56,11 @@ public class PrzechwytywanieKlawiszy {
         Segregator sort = new Segregator();
         przejscia = sort.sortuj(przejscia);
         for (Przejscie p1 : przejscia) {
-            p1.addOdleglosc(odlegloscMiedzyKlawiszami.dajRoznice(p1.pierwszy, p1.drugi));
-            System.out.println("s1: " + p1.pierwszy + "  s2: " + p1.drugi + " czas: " + p1.czas + "   odległość: " + p1.odleglosc);
+            p1.addOdleglosc(odlegloscMiedzyKlawiszami.dajRoznice(p1.dajPierwszyKlawisz(), p1.dajDrugiKlawisz()));
+            System.out.println("s1: " + p1.dajPierwszyKlawisz() + "  s2: " + p1.dajDrugiKlawisz() + " czas: " + p1.dajCzas() + "   odległość: " + p1.dajOdleglosc());
         }
     }
-    /** klasa tworząca przejście między klawiszami, liczy czas */
-    private class Przejscie { 
-
-        private String pierwszy; //przechowywuje pierwszy przycisk w przejściu
-        private String drugi; //przechowywuje drugi przycisk w przejściu
-        private long czas; //przechowywuje czas przejścia
-        private int odleglosc; //przechowywuje odległość między klawiszami
-        
-        /** //tworzy przejście z tylko jednym klawiszem*/
-        public Przejscie(String znak) { 
-            this.pierwszy = znak;
-        }
-
-        /** tworzy obiekt przejście z dwoma klawiszami i czasem */
-        public Przejscie(String s1, String s2, long tim) { 
-            this.pierwszy = s1;
-            this.drugi = s2;
-            this.czas = tim;
-        }
-        
-        /** ustawia drugi znak w przejściu. Pole "drugi" */
-        public void setDrugi(String znak) { 
-            this.drugi = znak;
-        }
-        
-        /** ustawia pole "czas" */
-        public void setTime(long tim) { 
-            this.czas = tim;
-        }
-        /** dodaje odległość między klawiszami // dodaje odległość między klawiszami. Pole "odleglosc" */
-        public void addOdleglosc(int _odleglosc) { 
-            this.odleglosc = _odleglosc;
-        }
-    }
+    
     
     /** klasa odpowiedzialna za liczenie czasu przejścia */
     private class Timer {
@@ -132,16 +99,16 @@ public class PrzechwytywanieKlawiszy {
         public ArrayList<Przejscie> sortuj(ArrayList<Przejscie> a) {
             
             boolean czyNowePrzejscie = false;
-            tmp.add(new SredniaPrzejsc(a.get(0).pierwszy, a.get(0).drugi, a.get(0).czas));
+            tmp.add(new SredniaPrzejsc(a.get(0).dajPierwszyKlawisz(), a.get(0).dajDrugiKlawisz(), a.get(0).dajCzas()));
             for (Przejscie a1 : a) {
                 for (SredniaPrzejsc t1 : tmp) {
-                    if (t1.sprawdz(a1.pierwszy, a1.drugi)) {
-                        t1.addTime(a1.czas);
+                    if (t1.sprawdz(a1.dajPierwszyKlawisz(), a1.dajDrugiKlawisz())) {
+                        t1.addTime(a1.dajCzas());
                         czyNowePrzejscie = false;
                     }
                 }
                 if(czyNowePrzejscie)
-                    tmp.add(new SredniaPrzejsc(a1.pierwszy, a1.drugi, a1.czas));
+                    tmp.add(new SredniaPrzejsc(a1.dajPierwszyKlawisz(), a1.dajDrugiKlawisz(), a1.dajCzas()));
                 czyNowePrzejscie = true;
             }
             SredniaPrzejsc ttt = new SredniaPrzejsc();
