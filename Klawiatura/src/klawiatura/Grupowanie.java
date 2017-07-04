@@ -12,45 +12,81 @@ import java.util.Collections;
  *
  * @author Jedrzej
  */
-
-/** Klasa odpowiedzialna za pogrupowanie klawiszy */
+/**
+ * Klasa odpowiedzialna za pogrupowanie klawiszy
+ */
 public class Grupowanie {
+
     private long czas;
     private ArrayList<Przejscie> przejscia;
     private ArrayList<String> grupaPierwsza;
     private ArrayList<String> grupaDruga;
-    private String[] wszystkieZnaki;
-    
+    private ArrayList<SredniCzasNacisniecia> srednieCzasy;
+
     public Grupowanie() {
-        wszystkieZnaki = new String[]{"q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"};
+        srednieCzasy = new ArrayList<>();
     }
- 
-    /** odpowaida za pogrupowanie klawiszy*/
+
+    /**
+     * odpowaida za pogrupowanie klawiszy
+     */
     public void grupuj(ArrayList<Przejscie> p) {
         przejscia = p;
-        Collections.sort(przejscia);
-        liczCzas();
-        for(Przejscie p1 : przejscia) {
-            if((p1.dajPierwszyKlawisz().equals("a") || p1.dajDrugiKlawisz().equals("a")) && p1.dajOdleglosc() < 4)
-            System.out.println("1: " + p1.dajPierwszyKlawisz() + " 2: " + p1.dajDrugiKlawisz() + " czas: " + p1.dajCzas() + " odległość : " + p1.dajOdleglosc());
-        }
-    }
-    
-    /** ustawia maksymalny czas przejść dla grup */
-    private void liczCzas() {
-        for (Przejscie p1 : przejscia) {
-            czas += p1.dajCzas();
-        }
-        czas /= przejscia.size();
-    }
-    
-    
 
-   private class WszystkieZnaki {
-       public WszystkieZnaki() {
-           
-       }
-       
-   }
-    
+        zrobTabliceSrednichCzasow();
+        Collections.sort(srednieCzasy);
+        for (SredniCzasNacisniecia sr : srednieCzasy) {
+            System.out.println("znak: " + sr.dajSwojZnak() + " czas: " + sr.dajSrednia());
+        }
+
+        tworzGrupe();
+
+        for (String s1 : grupaPierwsza) {
+            System.out.println(s1);
+        }
+    }
+
+    /**
+     * tworzy tablicę wciśnięć dla każdego klawisza
+     */
+    private void zrobTabliceSrednichCzasow() {
+        boolean czyBylTenKlawisz;
+        for (Przejscie p1 : przejscia) {
+            czyBylTenKlawisz = false;
+            for (SredniCzasNacisniecia sr : srednieCzasy) {
+                if (sr.dajSwojZnak().equals(p1.dajDrugiKlawisz())) {
+                    sr.dodajCzas(p1.dajCzas());
+                    czyBylTenKlawisz = true;
+                }
+            }
+            if (!czyBylTenKlawisz) {
+                srednieCzasy.add(new SredniCzasNacisniecia(p1.dajDrugiKlawisz(), p1.dajCzas()));
+            }
+        }
+    }
+
+    private void tworzGrupe() {
+        OdleglosciMiedzyKlawiszami odl = new OdleglosciMiedzyKlawiszami();
+        ArrayList<SredniCzasNacisniecia> tmp = srednieCzasy;
+        grupaPierwsza = new ArrayList<>();
+        for (SredniCzasNacisniecia sr : tmp) {
+            boolean czyPasuje = true;
+            if (grupaPierwsza.isEmpty()) {
+                grupaPierwsza.add(sr.dajSwojZnak());
+            } else {
+                for (String s1 : grupaPierwsza) {
+                    if (!(odl.dajRoznice(s1, sr.dajSwojZnak()) < 4 && grupaPierwsza.size() <= 5 && odl.dajPozycjeWRzedzie(s1) != odl.dajPozycjeWRzedzie(sr.dajSwojZnak()) && Math.abs(odl.dajRzad(s1)- odl.dajRzad(sr.dajSwojZnak())) <=1)) {
+                        czyPasuje = false;
+                    }
+                }
+                if (czyPasuje) {
+                    grupaPierwsza.add(sr.dajSwojZnak());
+                    //tmp.remove(sr);
+                    System.out.println("cos");
+                }
+
+            }
+        }
+    }
+
 }

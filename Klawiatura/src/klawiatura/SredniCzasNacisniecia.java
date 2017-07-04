@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 
 /** liczy i przeckowuje średni czas wciśnięcia przycisku od puszczenia dowolnego ostatniego klawisza*/
-   class SredniCzasNacisniecia {
+   class SredniCzasNacisniecia implements Comparable<SredniCzasNacisniecia> {
        public SredniCzasNacisniecia(String _znakKlawisza, long _czas) {
            czasy = new ArrayList<>();
            znakKlawisza = _znakKlawisza;
@@ -50,4 +50,16 @@ import java.util.ArrayList;
        public long dajSrednia() {
            return srednia;
        }
+
+    @Override
+    /** komparator do tablicy średnich czasów*/
+    public int compareTo(SredniCzasNacisniecia o) {
+        long porownaneCzasy = this.srednia - o.srednia;
+        if(porownaneCzasy == 0) {
+            return this.znakKlawisza.compareTo(o.znakKlawisza); 
+        }
+        else {
+            return (int) porownaneCzasy;
+        }
+    }
    }
