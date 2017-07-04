@@ -63,9 +63,6 @@ public class PrzechwytywanieKlawiszy {
         przejscia = sort.sortuj(przejscia);
         for (Przejscie p1 : przejscia) {
             p1.addOdleglosc(odlegloscMiedzyKlawiszami.dajRoznice(p1.dajPierwszyKlawisz(), p1.dajDrugiKlawisz()));
-            //System.out.println("s1: " + p1.dajPierwszyKlawisz() + "  s2: " + p1.dajDrugiKlawisz() + " czas: " + p1.dajCzas() + "   odległość: " + p1.dajOdleglosc());
-            if((p1.dajPierwszyKlawisz().equals("a") || p1.dajDrugiKlawisz().equals("a")) && p1.dajOdleglosc() <= 5)
-                System.out.println("kl: " + p1.dajPierwszyKlawisz() + " kl2: " + p1.dajDrugiKlawisz() + " czas: " + p1.dajCzas());
         }
     }
     

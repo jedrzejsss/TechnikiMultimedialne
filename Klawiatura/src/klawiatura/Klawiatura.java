@@ -78,7 +78,7 @@ public class Klawiatura extends Application {
                 }
             });
 
-            polecenieText = new Text("Przepisz dowolny tekst albo poniższy:");
+            polecenieText = new Text("Przepisz poniższy tekst lub wpisz cokolwiek:");
             polecenieText.setTextOrigin(VPos.TOP);
             polecenieText.setFont(new Font(Font.getDefault().getFamily(), 32));
             polecenieText.setFill(Color.rgb(80, 80, 80));

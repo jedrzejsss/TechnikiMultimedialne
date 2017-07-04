@@ -11,7 +11,7 @@ package klawiatura;
  */
 
 /** klasa tworząca przejście między klawiszami, liczy czas */
-    public class Przejscie { 
+    public class Przejscie implements Comparable<Przejscie> { 
 
         private String pierwszy; //przechowywuje pierwszy przycisk w przejściu
         private String drugi; //przechowywuje drugi przycisk w przejściu
@@ -63,4 +63,23 @@ package klawiatura;
         public int dajOdleglosc() {
             return odleglosc;
         }
+
+    @Override
+    public int compareTo(Przejscie o) {
+        long porownaneCzasy = this.czas - o.czas;
+ 
+        if(porownaneCzasy == 0) {
+            int porownajPierwszeZnaki = pierwszy.compareTo(o.pierwszy);
+            
+            if(porownajPierwszeZnaki == 0) {
+                return drugi.compareTo(o.drugi);
+            }
+            else { 
+                    return porownajPierwszeZnaki;
+            }
+        }
+        else {
+            return (int) porownaneCzasy;
+        }
+    }
     }
