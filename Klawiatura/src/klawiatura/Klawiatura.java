@@ -62,7 +62,8 @@ public class Klawiatura extends Application {
         private TextArea textArea;
         private VBox vbox2;
         private PrzechwytywanieKlawiszy przechwytywanieKlawiszy;
-        private Grupowanie grupowanie;
+        //private Grupowanie grupowanie;
+        private Grupowanie2 grupowanie;
 
         /** konstruktor klasy letter pane, ustwanienie jej parametrów */
         public LettersPane() { 
@@ -90,7 +91,8 @@ public class Klawiatura extends Application {
             textDoPrzepisania.setFill(Color.rgb(80, 80, 80));
 
             przechwytywanieKlawiszy = new PrzechwytywanieKlawiszy();
-            grupowanie = new Grupowanie();
+            //grupowanie = new Grupowanie();
+            grupowanie = new Grupowanie2();
 
             textArea = new TextArea();
             textArea.minHeight(200);
@@ -114,6 +116,7 @@ public class Klawiatura extends Application {
 
             przycisk.setOnAction(value -> {
                 przechwytywanieKlawiszy.segreguj();
+                //grupowanie.grupuj(przechwytywanieKlawiszy.dajPrzejscia());
                 grupowanie.grupuj(przechwytywanieKlawiszy.dajPrzejscia());
             });
 
