@@ -17,6 +17,7 @@ public class Grupowanie2 {
 
     private ArrayList<Przejscie> przejscia;
     private ArrayList<IloscWystapienKlawisza> znakiZ20NajszybszychPrzejsc;
+    private ArrayList<GrupaKlawiszy> grupyKlawiszy;
 
     /**
      * odpowaida za pogrupowanie klawiszy
@@ -24,13 +25,15 @@ public class Grupowanie2 {
     public void grupuj(ArrayList<Przejscie> p) {
         przejscia = wybierz20Najszybszych(p);
         znakiZ20NajszybszychPrzejsc = new ArrayList<>();
-        OdleglosciMiedzyKlawiszami od = new OdleglosciMiedzyKlawiszami();
-        for(Przejscie p1 : przejscia) {
-            System.out.println("kl1: " + p1.dajPierwszyKlawisz() + " kl2: " + p1.dajDrugiKlawisz() + " czas: " + p1.dajCzas() + " odleglosc: " + p1.dajOdleglosc());
-        }
         zlicz20Najszybszych();
-        for (IloscWystapienKlawisza il: znakiZ20NajszybszychPrzejsc) {
-            System.out.println(il);            
+        for (IloscWystapienKlawisza il : znakiZ20NajszybszychPrzejsc) {
+            System.out.println(il);
+        }
+        tworzGrupyKlawiszy();
+
+        for (GrupaKlawiszy gr : grupyKlawiszy) {
+            gr.sumujWystapienia();
+            System.out.println("gr: " + gr.dajNumerGrupy() + " iloscPierwszych: " + gr.dajIloscPierwszychKlikniec() + " ilosc dru: " + gr.dajIloscDrugichKlikniec());
         }
     }
 
@@ -49,7 +52,7 @@ public class Grupowanie2 {
         }
         return tmp;
     }
-    
+
     /**
      * zlicza ilość trafień w najszybszej dwudziestce przejść
      */
@@ -57,8 +60,7 @@ public class Grupowanie2 {
         zliczIloscWystapienPierwszego();
         zliczIloscWystapienDrugiego();
     }
-    
-    
+
     /**
      * zlicza ilość wystąpień danego klawisza jako drugi w przejściu
      */
@@ -79,7 +81,7 @@ public class Grupowanie2 {
             }
         }
     }
-    
+
     /**
      * zlicza ilość wystąpień danego klawisza jako pierwszy w przejściu
      */
@@ -97,6 +99,32 @@ public class Grupowanie2 {
                 IloscWystapienKlawisza tmp = new IloscWystapienKlawisza(p1.dajPierwszyKlawisz());
                 tmp.dodajWystapienie1Klawisza();
                 znakiZ20NajszybszychPrzejsc.add(tmp);
+            }
+        }
+    }
+
+    /**
+     * tworzy Potencjalne grupy klawiszy dla ułożenia palców
+     */
+    private void tworzGrupyKlawiszy() {
+        grupyKlawiszy = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            grupyKlawiszy.add(new GrupaKlawiszy(i));
+        }
+        for (IloscWystapienKlawisza il : znakiZ20NajszybszychPrzejsc) {
+            switch (il.dajRzadKlawisza()) {
+                case 1:
+                    if (il.dajNumerWRzedzie() > 0) {
+                        grupyKlawiszy.get(il.dajNumerWRzedzie() - 1).dodajKlawiszPierwszyGlowna(il);
+                    }
+                    grupyKlawiszy.get(il.dajNumerWRzedzie()).dodajKlawiszPierwszyBoczna(il);
+                    break;
+                case 2:
+                    grupyKlawiszy.get(il.dajNumerWRzedzie()).dodajKlawiszDrugi(il);
+                    break;
+                case 3:
+                    grupyKlawiszy.get(il.dajNumerWRzedzie()).dodajKlawiszTrzeci(il);
+                    break;
             }
         }
     }
