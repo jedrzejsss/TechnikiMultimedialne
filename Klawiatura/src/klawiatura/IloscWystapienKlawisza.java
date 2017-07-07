@@ -12,7 +12,7 @@ package klawiatura;
 /**
  * Zlicza i przechowuje ilość wystąpień klawisza na liście
  */
-public class IloscWystapienKlawisza {
+public class IloscWystapienKlawisza implements Comparable<IloscWystapienKlawisza> {
     public IloscWystapienKlawisza(String _znak) {
         znak = _znak;
         OdleglosciMiedzyKlawiszami od = new OdleglosciMiedzyKlawiszami();
@@ -21,10 +21,11 @@ public class IloscWystapienKlawisza {
     }
 
     String znak;
-    int iloscWystapien2KlawiszaWParze;
-    int iloscWystapien1KlawiszaWParze;
-    int numerRzedu;
-    int numerWRzedzie;
+    private int iloscWystapien2KlawiszaWParze;
+    private int iloscWystapien1KlawiszaWParze;
+    private int numerRzedu;
+    private int numerWRzedzie;
+    private float wartoscKlawisza;
 
     /**
      * Zlicza i przechowuje ilość wystąpień klawisza na liście
@@ -39,6 +40,7 @@ public class IloscWystapienKlawisza {
      */
     public void dodajWystapienie1Klawisza() {
         iloscWystapien1KlawiszaWParze++;
+        obliczWartoscKlawisza();
     }
     
     /**
@@ -87,5 +89,27 @@ public class IloscWystapienKlawisza {
     @Override
     public String toString() {
         return "znak: " + znak + " jako 1-szy klawisz: " + iloscWystapien1KlawiszaWParze + " jako 2-gi klawisz: " + iloscWystapien2KlawiszaWParze + " rząd: " + numerRzedu + " pozycja: " + numerWRzedzie;
+    }
+    
+    
+    public void obliczWartoscKlawisza() {
+        wartoscKlawisza = (float) (dajIloscWystapien1Klawisza() * 1 / 3) + (float) (dajIloscWystapien2Klawisza() * 2 / 3);
+    }
+    
+    @Override
+    /** komparator do tablicy wartości grup malejąco*/
+    public int compareTo(IloscWystapienKlawisza o) {
+        obliczWartoscKlawisza();
+        float porownaneWartosci = this.wartoscKlawisza - o.wartoscKlawisza;
+        if(porownaneWartosci == 0.0) {
+            return o.znak.compareTo(this.znak);  
+        }
+        else {
+            if(porownaneWartosci < 0.0) {
+                return  1;
+            } else {
+                return -1;
+            }
+        }
     }
 }

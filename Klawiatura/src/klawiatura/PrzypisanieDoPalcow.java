@@ -38,11 +38,11 @@ public class PrzypisanieDoPalcow {
     
 
     /**
-     * wybiera 5 grup z największą liczbą wciśniętych klawiszy
+     * wybiera 4 grupy z największą liczbą wciśniętych klawiszy
      */
-    private void wybierz5Najwiekszych() {
+    private void wybierz4Najwiekszych() {
         for (GrupaKlawiszy gk : grupyKlawiszy) {
-            if (piecONajwieksyejWartosci.size() <= 4) {
+            if (piecONajwieksyejWartosci.size() <= 3) {
                 piecONajwieksyejWartosci.add(gk);
             } else {
                 Collections.sort(piecONajwieksyejWartosci);
@@ -68,8 +68,8 @@ public class PrzypisanieDoPalcow {
         Collections.sort(piecONajwieksyejWartosci);
 
         boolean poprawnaTablica = false;
-        while(!poprawnaTablica && piecONajwieksyejWartosci.size() > 5) {
-            if(piecONajwieksyejWartosci.get(4).dajWartoscGrupy() == piecONajwieksyejWartosci.get(piecONajwieksyejWartosci.size() - 1).dajWartoscGrupy()) {
+        while(!poprawnaTablica && piecONajwieksyejWartosci.size() > 4) {
+            if(piecONajwieksyejWartosci.get(3).dajWartoscGrupy() == piecONajwieksyejWartosci.get(piecONajwieksyejWartosci.size() - 1).dajWartoscGrupy()) {
                 poprawnaTablica = true;
             } else {
                 piecONajwieksyejWartosci.remove(piecONajwieksyejWartosci.size() - 1);            }

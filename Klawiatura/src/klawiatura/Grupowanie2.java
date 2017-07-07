@@ -35,7 +35,7 @@ public class Grupowanie2 {
         for (GrupaKlawiszy gr : grupyKlawiszy) {
             gr.sumujWystapienia();
             gr.obliczWartoscGrupy();
-            System.out.println("gr: " + gr.dajNumerGrupy() + " iloscPierwszych: " + gr.dajIloscPierwszychKlikniec() + " ilosc dru: " + gr.dajIloscDrugichKlikniec());
+            System.out.println("gr: " + gr.dajNumerGrupy() + " iloscPierwszych: " + gr.dajIloscPierwszychKlikniec() + " ilosc dru: " + gr.dajIloscDrugichKlikniec() + " wartość: " + gr.dajWartoscGrupy());
         }
         przypisanieDoPalcow = new PrzypisanieDoPalcow();
         przypisanieDoPalcow.ustawGrupeKlawiszy(grupyKlawiszy);

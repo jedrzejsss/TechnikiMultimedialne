@@ -156,6 +156,26 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
         return wartoscGrupy;
     }
     
+    /**
+     * zwraca najpopularniejszy Klawisz jako obiekt z ilością wciśnięć
+     *
+     * @return IloscWystapienKlawisza
+     */
+    public IloscWystapienKlawisza dajNajpopularniejszyKlawisz() {
+        
+        return null;
+    }
+    
+    /**
+     * zwraca drugi najpopularniejszy Klawisz jako obiekt z ilością wciśnięć
+     *
+     * @return IloscWystapienKlawisza
+     */
+    public IloscWystapienKlawisza dajDrugiNajpopularniejszyKlawisz() {
+        
+        return null;
+    }
+    
      @Override
     /** komparator do tablicy wartości grup malejąco*/
     public int compareTo(GrupaKlawiszy o) {
