@@ -13,11 +13,15 @@ import javax.swing.JOptionPane;
  *
  * @author Jedrzej
  */
+/**
+ * Klasa odpowiedzialna za pogrupowanie klawiszy
+ */
 public class Grupowanie2 {
 
     private ArrayList<Przejscie> przejscia;
     private ArrayList<IloscWystapienKlawisza> znakiZ20NajszybszychPrzejsc;
     private ArrayList<GrupaKlawiszy> grupyKlawiszy;
+    private PrzypisanieDoPalcow przypisanieDoPalcow;
 
     /**
      * odpowaida za pogrupowanie klawiszy
@@ -26,15 +30,16 @@ public class Grupowanie2 {
         przejscia = wybierz20Najszybszych(p);
         znakiZ20NajszybszychPrzejsc = new ArrayList<>();
         zlicz20Najszybszych();
-        for (IloscWystapienKlawisza il : znakiZ20NajszybszychPrzejsc) {
-            System.out.println(il);
-        }
         tworzGrupyKlawiszy();
 
         for (GrupaKlawiszy gr : grupyKlawiszy) {
             gr.sumujWystapienia();
+            gr.obliczWartoscGrupy();
             System.out.println("gr: " + gr.dajNumerGrupy() + " iloscPierwszych: " + gr.dajIloscPierwszychKlikniec() + " ilosc dru: " + gr.dajIloscDrugichKlikniec());
         }
+        przypisanieDoPalcow = new PrzypisanieDoPalcow();
+        przypisanieDoPalcow.ustawGrupeKlawiszy(grupyKlawiszy);
+        przypisanieDoPalcow.test();
     }
 
     /**

@@ -83,6 +83,7 @@ public class IloscWystapienKlawisza {
         return numerWRzedzie;
     }
     
+    
     @Override
     public String toString() {
         return "znak: " + znak + " jako 1-szy klawisz: " + iloscWystapien1KlawiszaWParze + " jako 2-gi klawisz: " + iloscWystapien2KlawiszaWParze + " rząd: " + numerRzedu + " pozycja: " + numerWRzedzie;
