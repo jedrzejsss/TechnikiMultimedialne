@@ -29,10 +29,11 @@ public class PrzypisanieDoPalcow {
      */
     public void test() {
         piecONajwieksyejWartosci = new ArrayList<>();
-        wybierz5Najwiekszych();
+        wybierz4Najwiekszych();
         for (GrupaKlawiszy gk : piecONajwieksyejWartosci) {
             System.out.println("numer: " + gk.dajNumerGrupy() + " wartosc: " + gk.dajWartoscGrupy() + " ilosc1: " + gk.dajIloscPierwszychKlikniec() + " ilosc2: " + gk.dajIloscDrugichKlikniec());
         }
+        uzupelnijGrupy();
     }
     
     
@@ -57,7 +58,6 @@ public class PrzypisanieDoPalcow {
                 }
             }
         }
-
     }
 
     /**
@@ -73,6 +73,60 @@ public class PrzypisanieDoPalcow {
                 poprawnaTablica = true;
             } else {
                 piecONajwieksyejWartosci.remove(piecONajwieksyejWartosci.size() - 1);            }
+        }
+    }
+    
+    /**
+     * popasowywuje słabsze grupy do czterech największych
+     */
+    private void uzupelnijGrupy() {
+        if(dajNumerGrupyONajwiekszymNumerze() - dajNumerGrupyONajmniejszymNumerze() >4) {
+            dwieRece();
+        } else {
+            jednaReka();
+        }
+        
+    }
+    
+    /**
+     * zwraca numer grupy o najmniejszym numerze
+     *
+     * @return numerGrupy
+     */
+    public int dajNumerGrupyONajmniejszymNumerze() {
+        GrupaKlawiszy tmp = piecONajwieksyejWartosci.get(0);
+        for(GrupaKlawiszy gk : piecONajwieksyejWartosci) {
+            if(gk.dajNumerGrupy() < tmp.dajNumerGrupy()) {
+                tmp = gk;
+            }
+        }
+        return tmp.dajNumerGrupy();
+    }
+    
+    /**
+     * zwraca numer grupy o największym numerze grupy
+     *
+     * @return numerGrupy
+     */
+    public int dajNumerGrupyONajwiekszymNumerze() {
+        GrupaKlawiszy tmp = piecONajwieksyejWartosci.get(0);
+        for(GrupaKlawiszy gk : piecONajwieksyejWartosci) {
+            if(gk.dajNumerGrupy() > tmp.dajNumerGrupy()) {
+                tmp = gk;
+            }
+        }
+        return tmp.dajNumerGrupy();
+    }
+    
+    public void jednaReka() {
+        for (GrupaKlawiszy gk : piecONajwieksyejWartosci) {
+            System.out.println("najw: " + gk.dajNajpopularniejszyKlawisz().dajZnak() + " wartość: " + gk.dajDrugiNajpopularniejszyKlawisz().dajWartoscKlawisza());
+        }
+    }
+    
+    public void dwieRece() {
+        for (GrupaKlawiszy gk : piecONajwieksyejWartosci) {
+            System.out.println("najw: " + gk.dajNajpopularniejszyKlawisz().dajZnak() + " wartość: " + gk.dajDrugiNajpopularniejszyKlawisz().dajWartoscKlawisza());
         }
     }
 }

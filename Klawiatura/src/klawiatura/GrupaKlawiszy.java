@@ -71,36 +71,36 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
     public void sumujWystapienia() {
         sumaPierwszychKlikniec = 0;
         if (pierwszyRzadGlowna != null) {
-            sumaPierwszychKlikniec += pierwszyRzadGlowna.iloscWystapien1KlawiszaWParze;
+            sumaPierwszychKlikniec += pierwszyRzadGlowna.dajIloscWystapien1Klawisza();
         }
 
         if (pierwszyRzadBoczna != null) {
-            sumaPierwszychKlikniec += pierwszyRzadBoczna.iloscWystapien1KlawiszaWParze;
+            sumaPierwszychKlikniec += pierwszyRzadBoczna.dajIloscWystapien1Klawisza();
         }
 
         if (drugiRazad != null) {
-            sumaPierwszychKlikniec += drugiRazad.iloscWystapien1KlawiszaWParze;
+            sumaPierwszychKlikniec += drugiRazad.dajIloscWystapien1Klawisza();
         }
 
         if (trzeciRazad != null) {
-            sumaPierwszychKlikniec += trzeciRazad.iloscWystapien1KlawiszaWParze;
+            sumaPierwszychKlikniec += trzeciRazad.dajIloscWystapien1Klawisza();
         }
 
         sumaDrugichKlikniec = 0;
         if (pierwszyRzadGlowna != null) {
-            sumaDrugichKlikniec += pierwszyRzadGlowna.iloscWystapien2KlawiszaWParze;
+            sumaDrugichKlikniec += pierwszyRzadGlowna.dajIloscWystapien2Klawisza();
         }
 
         if (pierwszyRzadBoczna != null) {
-            sumaDrugichKlikniec += pierwszyRzadBoczna.iloscWystapien2KlawiszaWParze;
+            sumaDrugichKlikniec += pierwszyRzadBoczna.dajIloscWystapien2Klawisza();
         }
 
         if (drugiRazad != null) {
-            sumaDrugichKlikniec += drugiRazad.iloscWystapien2KlawiszaWParze;
+            sumaDrugichKlikniec += drugiRazad.dajIloscWystapien2Klawisza();
         }
 
         if (trzeciRazad != null) {
-            sumaDrugichKlikniec += trzeciRazad.iloscWystapien2KlawiszaWParze;
+            sumaDrugichKlikniec += trzeciRazad.dajIloscWystapien2Klawisza();
         }
     }
     
@@ -162,8 +162,27 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
      * @return IloscWystapienKlawisza
      */
     public IloscWystapienKlawisza dajNajpopularniejszyKlawisz() {
+        IloscWystapienKlawisza tmp;
+        tmp = pierwszyRzadGlowna;
+        if (pierwszyRzadBoczna != null) {
+            if(pierwszyRzadBoczna.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
+                tmp = pierwszyRzadBoczna;
+            }
+        }
+
+        if (drugiRazad != null) {
+            if(drugiRazad.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
+                tmp = drugiRazad;
+            }
+        }
+
+        if (trzeciRazad != null) {
+            if(trzeciRazad.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
+                tmp = trzeciRazad;
+            }
+        }
         
-        return null;
+        return tmp;
     }
     
     /**
@@ -177,7 +196,7 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
     }
     
      @Override
-    /** komparator do tablicy wartości grup malejąco*/
+    /** komparator do tablicy wartości grup, sortuje malejąco*/
     public int compareTo(GrupaKlawiszy o) {
         float porownaneWartosci = this.wartoscGrupy - o.wartoscGrupy;
         if(porownaneWartosci == 0.0) {

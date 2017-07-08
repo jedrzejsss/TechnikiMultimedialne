@@ -48,6 +48,7 @@ public class IloscWystapienKlawisza implements Comparable<IloscWystapienKlawisza
      */
     public void dodajWystapienie2Klawisza() {
         iloscWystapien2KlawiszaWParze++;
+        obliczWartoscKlawisza();
     }
     
     /**
@@ -85,10 +86,17 @@ public class IloscWystapienKlawisza implements Comparable<IloscWystapienKlawisza
         return numerWRzedzie;
     }
     
+    /**
+     * Metoda zwracająca numer klawisza w rzędzie (od lewej)
+     */
+    public float dajWartoscKlawisza() {
+        return (iloscWystapien1KlawiszaWParze / 3) + (iloscWystapien2KlawiszaWParze * 2 / 3);
+    }
+    
     
     @Override
     public String toString() {
-        return "znak: " + znak + " jako 1-szy klawisz: " + iloscWystapien1KlawiszaWParze + " jako 2-gi klawisz: " + iloscWystapien2KlawiszaWParze + " rząd: " + numerRzedu + " pozycja: " + numerWRzedzie;
+        return "znak: " + znak + " jako 1-szy klawisz: " + iloscWystapien1KlawiszaWParze + " jako 2-gi klawisz: " + iloscWystapien2KlawiszaWParze + " rząd: " + numerRzedu + " pozycja: " + numerWRzedzie + " wartosc: " + wartoscKlawisza;
     }
     
     

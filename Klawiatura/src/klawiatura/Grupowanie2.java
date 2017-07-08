@@ -119,10 +119,10 @@ public class Grupowanie2 {
         for (IloscWystapienKlawisza il : znakiZ20NajszybszychPrzejsc) {
             switch (il.dajRzadKlawisza()) {
                 case 1:
-                    if (il.dajNumerWRzedzie() > 0) {
-                        grupyKlawiszy.get(il.dajNumerWRzedzie() - 1).dodajKlawiszPierwszyGlowna(il);
-                    }
-                    grupyKlawiszy.get(il.dajNumerWRzedzie()).dodajKlawiszPierwszyBoczna(il);
+
+                    grupyKlawiszy.get(il.dajNumerWRzedzie()).dodajKlawiszPierwszyGlowna(il);
+                    if(il.dajNumerWRzedzie() < 9)
+                    grupyKlawiszy.get(il.dajNumerWRzedzie() - 1).dodajKlawiszPierwszyBoczna(il);
                     break;
                 case 2:
                     grupyKlawiszy.get(il.dajNumerWRzedzie()).dodajKlawiszDrugi(il);
