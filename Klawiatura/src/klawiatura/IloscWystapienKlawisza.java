@@ -88,9 +88,11 @@ public class IloscWystapienKlawisza implements Comparable<IloscWystapienKlawisza
     
     /**
      * Metoda zwracająca numer klawisza w rzędzie (od lewej)
+     * @return 
      */
     public float dajWartoscKlawisza() {
-        return (iloscWystapien1KlawiszaWParze / 3) + (iloscWystapien2KlawiszaWParze * 2 / 3);
+        obliczWartoscKlawisza();
+        return wartoscKlawisza;
     }
     
     
@@ -101,7 +103,7 @@ public class IloscWystapienKlawisza implements Comparable<IloscWystapienKlawisza
     
     
     public void obliczWartoscKlawisza() {
-        wartoscKlawisza = (float) (dajIloscWystapien1Klawisza() * 1 / 3) + (float) (dajIloscWystapien2Klawisza() * 2 / 3);
+        wartoscKlawisza = (float) (dajIloscWystapien1Klawisza()) / 3 + (float) (dajIloscWystapien2Klawisza())* 2 / 3;
     }
     
     @Override

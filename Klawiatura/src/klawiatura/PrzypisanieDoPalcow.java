@@ -120,13 +120,15 @@ public class PrzypisanieDoPalcow {
     
     public void jednaReka() {
         for (GrupaKlawiszy gk : piecONajwieksyejWartosci) {
-            System.out.println("najw: " + gk.dajNajpopularniejszyKlawisz().dajZnak() + " wartość: " + gk.dajDrugiNajpopularniejszyKlawisz().dajWartoscKlawisza());
+
+            System.out.println("najw: " + gk.dajNajpopularniejszyKlawisz().dajZnak() + " wartość: " + gk.dajNajpopularniejszyKlawisz().dajWartoscKlawisza());
         }
     }
     
     public void dwieRece() {
         for (GrupaKlawiszy gk : piecONajwieksyejWartosci) {
-            System.out.println("najw: " + gk.dajNajpopularniejszyKlawisz().dajZnak() + " wartość: " + gk.dajDrugiNajpopularniejszyKlawisz().dajWartoscKlawisza());
+
+            System.out.println("najw: " + gk.dajNajpopularniejszyKlawisz().dajZnak() + " wartość: " + gk.dajNajpopularniejszyKlawisz().dajWartoscKlawisza());
         }
     }
 }

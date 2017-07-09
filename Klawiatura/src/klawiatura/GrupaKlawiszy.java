@@ -16,10 +16,10 @@ package klawiatura;
  */
 public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
 
-    private IloscWystapienKlawisza pierwszyRzadGlowna;
-    private IloscWystapienKlawisza pierwszyRzadBoczna;
-    private IloscWystapienKlawisza drugiRazad;
-    private IloscWystapienKlawisza trzeciRazad;
+    private IloscWystapienKlawisza pierwszyRzadGlowna = null;
+    private IloscWystapienKlawisza pierwszyRzadBoczna = null;
+    private IloscWystapienKlawisza drugiRazad = null;
+    private IloscWystapienKlawisza trzeciRazad = null;
     private int sumaPierwszychKlikniec;
     private int sumaDrugichKlikniec;
     private int numerGrupy;
@@ -162,24 +162,45 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
      * @return IloscWystapienKlawisza
      */
     public IloscWystapienKlawisza dajNajpopularniejszyKlawisz() {
-        IloscWystapienKlawisza tmp;
-        tmp = pierwszyRzadGlowna;
+        IloscWystapienKlawisza tmp = null;
+        if(pierwszyRzadGlowna != null) {
+            tmp = pierwszyRzadGlowna;
+        }
+        System.out.println("glownt: " + pierwszyRzadGlowna);
         if (pierwszyRzadBoczna != null) {
-            if(pierwszyRzadBoczna.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
+            System.out.println("boczny: " + pierwszyRzadBoczna);
+            if(tmp != null) {
+                if(pierwszyRzadBoczna.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
+                    tmp = pierwszyRzadBoczna;
+                }
+            } else {
                 tmp = pierwszyRzadBoczna;
             }
+            
         }
 
         if (drugiRazad != null) {
-            if(drugiRazad.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
+            System.out.println("drugi: " + drugiRazad);
+            if (tmp != null) {
+                if(drugiRazad.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
+                    tmp = drugiRazad;
+                }
+            } else {
                 tmp = drugiRazad;
             }
+            
         }
 
         if (trzeciRazad != null) {
-            if(trzeciRazad.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
+            System.out.println("trzeci: " + trzeciRazad);
+            if (tmp != null) {
+                if(trzeciRazad.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
+                    tmp = trzeciRazad;
+                }
+            } else {
                 tmp = trzeciRazad;
             }
+            
         }
         
         return tmp;
@@ -194,6 +215,7 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
         
         return null;
     }
+    
     
      @Override
     /** komparator do tablicy wartości grup, sortuje malejąco*/
