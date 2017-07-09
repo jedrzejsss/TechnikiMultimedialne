@@ -166,9 +166,8 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
         if(pierwszyRzadGlowna != null) {
             tmp = pierwszyRzadGlowna;
         }
-        System.out.println("glownt: " + pierwszyRzadGlowna);
+        
         if (pierwszyRzadBoczna != null) {
-            System.out.println("boczny: " + pierwszyRzadBoczna);
             if(tmp != null) {
                 if(pierwszyRzadBoczna.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
                     tmp = pierwszyRzadBoczna;
@@ -180,7 +179,6 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
         }
 
         if (drugiRazad != null) {
-            System.out.println("drugi: " + drugiRazad);
             if (tmp != null) {
                 if(drugiRazad.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
                     tmp = drugiRazad;
@@ -192,7 +190,6 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
         }
 
         if (trzeciRazad != null) {
-            System.out.println("trzeci: " + trzeciRazad);
             if (tmp != null) {
                 if(trzeciRazad.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
                     tmp = trzeciRazad;
@@ -212,8 +209,51 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
      * @return IloscWystapienKlawisza
      */
     public IloscWystapienKlawisza dajDrugiNajpopularniejszyKlawisz() {
+        IloscWystapienKlawisza tmp = null;
+        IloscWystapienKlawisza najpopularniejszy = dajDrugiNajpopularniejszyKlawisz();
+        if(pierwszyRzadGlowna != null) {
+            if (!pierwszyRzadGlowna.dajZnak().equals(najpopularniejszy.dajZnak())) {
+                 tmp = pierwszyRzadGlowna;
+            }
+        }
         
-        return null;
+        if (pierwszyRzadBoczna != null) {
+            if(tmp != null && !pierwszyRzadBoczna.dajZnak().equals(najpopularniejszy.dajZnak())) {
+                if(pierwszyRzadBoczna.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
+                    tmp = pierwszyRzadBoczna;
+                }
+            } else {
+                tmp = pierwszyRzadBoczna;
+            }
+            
+        }
+
+        if (drugiRazad != null) {
+            if (tmp != null && !drugiRazad.dajZnak().equals(najpopularniejszy.dajZnak())) {
+                if(drugiRazad.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
+                    tmp = drugiRazad;
+                }
+            } else {
+                tmp = drugiRazad;
+            }
+            
+        }
+
+        if (trzeciRazad != null) {
+            if (tmp != null && !trzeciRazad.dajZnak().equals(najpopularniejszy.dajZnak())) {
+                if(trzeciRazad.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
+                    tmp = trzeciRazad;
+                }
+            } else {
+                tmp = trzeciRazad;
+            }
+            
+        }
+        if (tmp == null) {
+            return najpopularniejszy;
+        } else {
+            return tmp;
+        }
     }
     
     
