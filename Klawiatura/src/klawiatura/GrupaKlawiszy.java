@@ -16,8 +16,7 @@ package klawiatura;
  */
 public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
 
-    private IloscWystapienKlawisza pierwszyRzadGlowna = null;
-    private IloscWystapienKlawisza pierwszyRzadBoczna = null;
+    private IloscWystapienKlawisza pierwszyRzad = null;
     private IloscWystapienKlawisza drugiRazad = null;
     private IloscWystapienKlawisza trzeciRazad = null;
     private int sumaPierwszychKlikniec;
@@ -34,17 +33,8 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
      *
      * @param klawisz
      */
-    public void dodajKlawiszPierwszyGlowna(IloscWystapienKlawisza klawisz) {
-        pierwszyRzadGlowna = klawisz;
-    }
-
-    /**
-     * Uatawia boczny klawisz w z pierwszego Rzędu
-     *
-     * @param klawisz
-     */
-    public void dodajKlawiszPierwszyBoczna(IloscWystapienKlawisza klawisz) {
-        pierwszyRzadBoczna = klawisz;
+    public void dodajKlawiszPierwszy(IloscWystapienKlawisza klawisz) {
+        pierwszyRzad = klawisz;
     }
 
     /**
@@ -70,12 +60,8 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
      */
     public void sumujWystapienia() {
         sumaPierwszychKlikniec = 0;
-        if (pierwszyRzadGlowna != null) {
-            sumaPierwszychKlikniec += pierwszyRzadGlowna.dajIloscWystapien1Klawisza();
-        }
-
-        if (pierwszyRzadBoczna != null) {
-            sumaPierwszychKlikniec += pierwszyRzadBoczna.dajIloscWystapien1Klawisza();
+        if (pierwszyRzad != null) {
+            sumaPierwszychKlikniec += pierwszyRzad.dajIloscWystapien1Klawisza();
         }
 
         if (drugiRazad != null) {
@@ -87,12 +73,8 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
         }
 
         sumaDrugichKlikniec = 0;
-        if (pierwszyRzadGlowna != null) {
-            sumaDrugichKlikniec += pierwszyRzadGlowna.dajIloscWystapien2Klawisza();
-        }
-
-        if (pierwszyRzadBoczna != null) {
-            sumaDrugichKlikniec += pierwszyRzadBoczna.dajIloscWystapien2Klawisza();
+        if (pierwszyRzad != null) {
+            sumaDrugichKlikniec += pierwszyRzad.dajIloscWystapien2Klawisza();
         }
 
         if (drugiRazad != null) {
@@ -112,10 +94,10 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
     public void obliczWartoscGrupy() {
         wartoscGrupy = (float) (dajIloscPierwszychKlikniec() * 1 / 3) + (float) (dajIloscDrugichKlikniec() * 2 / 3);
         if (numerGrupy <= 6) {
-            wartoscGrupy /= 4;
+            wartoscGrupy /= 3;
         } else {
             if (numerGrupy <= 8) {
-                wartoscGrupy /= 3;
+                wartoscGrupy /= 2;
             }
         }
     }
@@ -163,19 +145,8 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
      */
     public IloscWystapienKlawisza dajNajpopularniejszyKlawisz() {
         IloscWystapienKlawisza tmp = null;
-        if(pierwszyRzadGlowna != null) {
-            tmp = pierwszyRzadGlowna;
-        }
-        
-        if (pierwszyRzadBoczna != null) {
-            if(tmp != null) {
-                if(pierwszyRzadBoczna.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
-                    tmp = pierwszyRzadBoczna;
-                }
-            } else {
-                tmp = pierwszyRzadBoczna;
-            }
-            
+        if(pierwszyRzad != null) {
+            tmp = pierwszyRzad;
         }
 
         if (drugiRazad != null) {
@@ -186,7 +157,6 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
             } else {
                 tmp = drugiRazad;
             }
-            
         }
 
         if (trzeciRazad != null) {
@@ -197,9 +167,7 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
             } else {
                 tmp = trzeciRazad;
             }
-            
         }
-        
         return tmp;
     }
     
@@ -211,23 +179,12 @@ public class GrupaKlawiszy implements Comparable<GrupaKlawiszy> {
     public IloscWystapienKlawisza dajDrugiNajpopularniejszyKlawisz() {
         IloscWystapienKlawisza tmp = null;
         IloscWystapienKlawisza najpopularniejszy = dajDrugiNajpopularniejszyKlawisz();
-        if(pierwszyRzadGlowna != null) {
-            if (!pierwszyRzadGlowna.dajZnak().equals(najpopularniejszy.dajZnak())) {
-                 tmp = pierwszyRzadGlowna;
+        if(pierwszyRzad != null) {
+            if (!pierwszyRzad.dajZnak().equals(najpopularniejszy.dajZnak())) {
+                 tmp = pierwszyRzad;
             }
         }
         
-        if (pierwszyRzadBoczna != null) {
-            if(tmp != null && !pierwszyRzadBoczna.dajZnak().equals(najpopularniejszy.dajZnak())) {
-                if(pierwszyRzadBoczna.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
-                    tmp = pierwszyRzadBoczna;
-                }
-            } else {
-                tmp = pierwszyRzadBoczna;
-            }
-            
-        }
-
         if (drugiRazad != null) {
             if (tmp != null && !drugiRazad.dajZnak().equals(najpopularniejszy.dajZnak())) {
                 if(drugiRazad.dajWartoscKlawisza() > tmp.dajWartoscKlawisza()) {
