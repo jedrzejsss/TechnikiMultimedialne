@@ -102,6 +102,8 @@ public class PrzypisanieDoPalcow {
 
             System.out.println("najw: " + gk.dajNajpopularniejszyKlawisz().dajZnak() + " wartość: " + gk.dajNajpopularniejszyKlawisz().dajWartoscKlawisza());
         }
+        rece = new Reka();
+        rece.tworzDwieRece(czteryONajwieksyejWartosci, grupyKlawiszy);
     }
 
     /**
